@@ -1,0 +1,90 @@
+<!-- MANAGE POSITIONS DIALOG -->
+<md-dialog class="manage-position" aria-label="{{vm.title}}">
+    <form name="managePosition" class="md-inline-form" novalidate>
+        <!-- DIALOG TOOLBAR -->
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <!-- / DIALOG TOOLBAR -->
+
+        <!-- DIALOG CONTENT -->
+        <md-dialog-content>
+            <div class="manage-positions-group pt-16">
+
+                <div id="manage-position-item-{{i}}" class="manage-position-item" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]" layout>
+                    <div layout="row" flex>
+                        <!-- Symbol -->
+                        <md-autocomplete flex
+                            ng-disabled="false"
+                            ng-model="vm.managePosition[i].symbol"
+                            ng-pattern="/^[a-zA-Z]+$/"
+                            md-no-cache="false"
+                            md-selected-item=""
+                            md-search-text-change=""
+                            md-search-text=""
+                            md-selected-item-change=""
+                            md-items=""
+                            md-item-text=""
+                            md-input-name="symbol"
+                            md-min-length="2"
+                            md-input-maxlength="16"
+                            md-floating-label="Search Symbol">
+                            <md-item-template>
+                                <span md-highlight-text="" md-highlight-flags="^i"></span>
+                            </md-item-template>
+                            <md-not-found>ERROR: Not found</md-not-found>
+                            <div ng-messages="managePosition[i].symbol.$error" ng-show="managePosition[i].symbol.$touched" multiple role="alert">
+                                <div ng-message="required"><span>ERROR: required</span></div>
+                                <div ng-message="min"><span>ERROR: min</span></div>
+                                <div ng-message="max"><span>ERROR: max</span></div>
+                            </div>
+                        </md-autocomplete>
+                        <!-- / Symbol -->
+                        <!-- Shares -->
+                        <md-input-container class="mb-0" flex>
+                            <input type="number" step="any" name="shares" ng-model="vm.managePosition[i].shares" min="1" max="999" ng-pattern="/^[0-9]+$/" placeholder="Shares" required />
+                            <div ng-messages="managePosition[i].shares.$error" ng-show="managePosition[i].shares.$touched" multiple role="alert">
+                                <div ng-message="required"><span>ERROR: required</span></div>
+                                <div ng-message="min"><span>ERROR: min</span></div>
+                                <div ng-message="max"><span>ERROR: max</span></div>
+                                <div ng-message="pattern"><span>ERROR: pattern</span></div>
+                            </div>
+                        </md-input-container>
+                        <!-- / Shares -->
+                        <!-- Price -->
+                        <md-input-container class="mb-0" flex>
+                            <input type="number" step="any" name="price" ng-model="vm.managePosition[i].price" min="1" max="9999" ng-pattern="/^[0-9]+$/" placeholder="Price" required />
+                            <div ng-messages="managePosition[i].price.$error" ng-show="managePosition[i].price.$touched" multiple role="alert">
+                                <div ng-message="required"><span>ERROR: required</span></div>
+                                <div ng-message="min"><span>ERROR: min</span></div>
+                                <div ng-message="max"><span>ERROR: max</span></div>
+                                <div ng-message="pattern"><span>ERROR: pattern</span></div>
+                            </div>
+                        </md-input-container>
+                        <!-- / Price -->
+                        <!-- Date -->
+                        <md-datepicker ng-model="vm.managePosition[i].date" md-placeholder="Enter date" flex style="background: none; margin-top: 12px;"></md-datepicker>
+                        <!-- / Date -->
+                    </div>
+                </div>
+            </div>
+            <div class="add-position-empty" layout>
+                <md-button aria-label="+ Add Another Position" flex ng-click="vm.clonePositionEmpty()"> + Add Another Position</md-button>
+            </div>
+        </md-dialog-content>
+        <!-- / DIALOG CONTENT -->
+        
+        <!-- DIALOG ACTIONS -->
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <!-- ng-disabled="managePosition.$invalid || managePosition.$pristine" -->
+            <md-button ng-click="vm.managePositionAction(vm.managePosition)" class="save-button md-accent md-raised" aria-label="{{vm.title}}">{{vm.title}}</md-button>
+        </md-dialog-actions>
+        <!-- / DIALOG ACTIONS -->
+    </form>
+</md-dialog>
+<!-- / MANAGE POSITIONS DIALOG -->

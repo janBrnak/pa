@@ -1,0 +1,45 @@
+## Prod Version
+
+# name and version of parent image
+FROM node:latest
+
+# name of maintainer
+MAINTAINER JanBrnak
+
+# set arguments
+ARG og_host=127.0.0.1
+ARG og_port=8080
+
+# global ENV variables
+ENV ENV=prod \
+	PORT=3333 \
+	OG_HOST=$og_host \
+	OG_PORT=$og_port
+
+# list of ports
+EXPOSE 3333
+
+# workdir in the container
+WORKDIR /usr/src/app
+
+# run commands in the image
+RUN apt-get update --yes \
+	&& apt-get upgrade --yes
+
+# copy/paste only package.json in the workdir
+COPY package.json .
+
+# run commands in the image and install node dependencies
+RUN npm install
+
+# copy/paste all folders/files in the workdir
+#COPY ["OG", "app.js"] .
+COPY . .
+
+# run command in the container
+CMD npm start
+
+# Build image: docker build --build-arg=og_host=192.168.0.55 --build-arg=og_port=8090 --tag=pa_back-end:latest --file=Dockerfile.prod .
+# Create container: docker run --detach --publish=3333:3333 --name=pa-be-prod pa_back-end:latest
+# Create container: docker run --interactive --tty --publish=3333:3333 --name=pa-be-prod pa_back-end:latest /bin/bash -c 'npm start'
+# Connect to container: docker exec --interactive --tty pa-be-prod /bin/bash

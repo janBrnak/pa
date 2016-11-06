@@ -1,0 +1,29 @@
+## Prod Version
+
+# name and version of parent image
+FROM nginx:latest
+
+# name of maintainer
+MAINTAINER JanBrnak
+
+# set arguments
+ARG api_host=127.0.0.1
+ARG api_port=3333
+
+# list of ports
+EXPOSE 3000
+
+# workdir in the container
+WORKDIR /usr/src/app
+
+# run commands in the image
+RUN apt-get update --yes \
+	&& apt-get upgrade --yes
+
+
+# copy/paste all folders/files in the workdir
+COPY ./dist/* ./
+
+
+
+# service nginx start/stop/restart/status

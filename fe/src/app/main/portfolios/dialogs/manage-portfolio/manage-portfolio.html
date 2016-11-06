@@ -1,0 +1,76 @@
+<!-- MANAGE PORTFOLIOS DIALOG -->
+<md-dialog class="manage-portfolio" aria-label="{{vm.title}}">
+    <form name="managePortfolio" class="md-inline-form" novalidate>
+        <!-- DIALOG TOOLBAR -->
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <!-- / DIALOG TOOLBAR -->
+        
+        <!-- DIALOG CONTENT -->
+        <md-dialog-content>
+            <!-- name -->
+            <input type="hidden" name="name" ng-model="vm.managePortfolio.id">
+
+            <input type="hidden" name="value" ng-model="vm.managePortfolio.value" value="1">
+
+            <!-- name -->
+            <!-- name -->
+            <div layout="row" flex>
+                <md-input-container flex class="mb-0">
+                    <input type="text" name="name" ng-model="vm.managePortfolio.name" ng-pattern="/^[a-zA-Z0-9\-\_\s]+$/" placeholder="Portfolio Name" required>
+                    <div ng-messages="managePortfolio.name.$error" ng-show="managePortfolio.name.$touched" role="alert">
+                        <div ng-message="required"><span>ERROR: required</span></div>
+                        <div ng-message="pattern"><span>ERROR: pattern</span></div>
+                    </div>
+                </md-input-container>
+            </div>
+            <!-- / name -->
+            
+            <!-- defaultCountry -->
+            <div layout="row" flex>
+                <md-select placeholder="Default Country" ng-model="vm.managePortfolio.defaultCountry" flex required>
+                    <md-option value="US">United States</md-option>
+                    <md-option value="UK">United Kingdom</md-option>
+                    <md-option value="CN">China</md-option>
+                </md-select>
+            </div>
+            <!-- / defaultCountry -->
+
+            <!-- strategy -->
+            <div layout="row" flex>
+                <md-select placeholder="Strategy" ng-model="vm.managePortfolio.strategy" flex required>
+                    <md-option value="balanced">Balanced</md-option>
+                    <md-option value="active-management">Active Management</md-option>
+                    <md-option value="conservative">Conservative</md-option>
+                    <md-option value="speculative">Speculative</md-option>
+                    <md-option value="tactical-growth">Tactical Growth</md-option>
+                </md-select>
+            </div>
+            <!-- / strategy -->
+
+            <!-- useItAt -->
+            <div layout="row" flex>
+                <md-select placeholder="Use It As" ng-model="vm.managePortfolio.useItAt" flex required>
+                    <md-option value="play-portfolio">Play Portfolio</md-option>
+                    <md-option value="kids-fund">Kids Fund</md-option>
+                    <md-option value="moms-savings">Mom's Savings</md-option>
+                </md-select>
+            </div>
+            <!-- / useItAt -->
+        </md-dialog-content>
+        <!-- / DIALOG CONTENT -->
+        
+        <!-- DIALOG ACTIONS -->
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <md-button ng-click="vm.managePortfolioAction(vm.managePortfolio)" class="save-button md-accent md-raised" aria-label="{{vm.title}}" ng-disabled="managePortfolio.$invalid || managePortfolio.$pristine">{{vm.title}}</md-button>
+        </md-dialog-actions>
+        <!-- / DIALOG ACTIONS -->
+    </form>
+</md-dialog>
+<!-- / MANAGE PORTFOLIOS DIALOG -->

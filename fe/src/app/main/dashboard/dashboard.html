@@ -1,0 +1,59 @@
+<div id="dashboard" class="page-layout simple fullwidth doc-page">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start">
+            <div class="title">Dashboards</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+        <!-- PORTFOLIOS WIDGET GROUP -->
+        <div class="md-headline">Top Portfolios</div>
+        <dvi class="widget-group" layout="row" flex="100" layout-wrap>
+            <!-- WIDGETS -->
+            <ms-widget ng-repeat="portfolio in vm.portfolios" flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+
+                <!-- Front -->
+                <ms-widget-front class="white-bg">
+                    <div class="pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
+                        <div class="h2"><a ng-href="/portfolio/{{portfolio.id}}">{{portfolio.name}}</a></div>
+                    </div>
+
+                    <div class="pt-8 pb-8" layout="column" layout-align="center center">
+                        <div class="red-fg font-size-72 line-height-72">
+                            <nvd3 options="vm.chartPie" data="portfolio.data"></nvd3>
+                        </div>
+                    </div>
+
+                    <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
+                        <span class="h4 secondary-text text-truncate">6.6 K ( NO CASH )</span>
+                        <span class="h4 ml-8">7.00 <i class="icon icon-trending-down s16"></i> 11%</span>
+                    </div>
+                </ms-widget-front>
+                <!-- / Front -->
+
+                <!-- Back -->
+                <ms-widget-back class="p-16 white-bg">
+                    <div class="flip-to-front">
+                        <md-button class="md-icon-button" ng-click="flipWidget()"
+                                   aria-label="Flip widget">
+                            <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                        </md-button>
+                    </div>
+
+                    <div>
+                        DETAIL
+                    </div>
+                </ms-widget-back>
+                <!-- / Back -->
+
+            </ms-widget>
+            <!-- / WIDGETS -->
+        </div>
+        <!-- / PORTFOLIOS WIDGET GROUP -->
+	</div>
+    <!-- /CONTENT -->
+</div>
