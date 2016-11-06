@@ -26,21 +26,20 @@ WORKDIR /usr/src/app
 RUN apt-get update --yes \
 	&& apt-get upgrade --yes \
 	&& npm install -g gulp-cli \
-	&& npm install -g bower \
-	&& bower install \
-	&& npm install
+	&& npm install -g bower
 
-# copy/paste only package.json in the workdir
-# COPY package.json .
+# copy/paste only package.json/bower.json in the workdir
+COPY package.json .
+COPY bower.json .
 
 # run commands in the image and install node dependencies
-# RUN bower install && npm install
+RUN bower install --allow-root --force-latest && npm install
 
 # copy/paste all folders/files in the workdir
-# COPY . .
+COPY . .
 
 # run command in the container
-# CMD gulp serve
+CMD gulp serve
 
 # Build image: docker build --build-arg=api_host=127.0.0.1 --build-arg=api_port=3333 --tag=pa_front-end:latest --file=Dockerfile.prod .
 # Create container: docker run --detach --publish=3000:3000 --name=pa-fe-prod pa_front-end:latest

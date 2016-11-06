@@ -16,7 +16,7 @@ services:
     container_name: pa-fe-prod
     build:
       context: ./fe
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.dev
       args:
         - api_host=127.0.0.1
         - api_port=3333
