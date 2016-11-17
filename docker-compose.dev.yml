@@ -1,0 +1,31 @@
+version: '2'
+services:
+  back-end:
+    container_name: pa-be-dev
+    build:
+      context: ./be
+      dockerfile: Dockerfile.dev
+      args:
+        - og_host=192.168.0.55
+        - og_port=8090
+    ports:
+      - "3334:3333"
+   volumes:
+     - $PWD/be:/usr/src/app
+  front-end:
+    container_name: pa-fe-dev
+    build:
+      context: ./fe
+      dockerfile: Dockerfile.dev
+      args:
+        - api_host=127.0.0.1
+        - api_port=3333
+    ports:
+      - "3001:3000"
+   volumes:
+     - $PWD:/usr/src/app
+
+
+# docker-compose up -d
+# docker-compose stop
+# docker-compose logs --follow

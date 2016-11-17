@@ -22,8 +22,9 @@ RUN apt-get update --yes \
 
 
 # copy/paste all folders/files in the workdir
-COPY ./dist/* ./
+COPY ./dist .
 
-
+# copy/paste nginx.conf
+COPY ./nginx.conf /etc/nginx/
 
 # service nginx start/stop/restart/status
