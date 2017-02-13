@@ -18,15 +18,8 @@
                     }
                 },
                 resolve: {
-                    PortfoliosData: function($http) {
-                        return $http({
-                            method: 'GET',
-                            url: 'http://localhost:3333/portfolios',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            }
-                        });
+                    PortfoliosData: function(paApiPrtfolios) {
+                        return paApiPrtfolios.list();
                     }
                 }
             });

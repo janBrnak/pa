@@ -12,7 +12,7 @@
         // Data
         vm.helloText = 'Portfolio';
         vm.selectedIndex = 1;
-        vm.data = PortfolioData.data.data;
+        vm.data = PortfolioData;
         vm.positions = vm.data.rootNode.positions
 
         // Methods

@@ -34,6 +34,6 @@ RUN apt-get update --yes \
 # CMD npm run dev
 # CMD npm run dev-brk
 
-# Build image: docker build --build-arg=og_host=192.168.0.55 --build-arg=og_port=8090 --tag=my-app-dev:latest --file=Dockerfile.dev .
-# Create container: docker run --interactive --tty --volume=$PWD:/usr/src/app --publish=3333:3333 --publish=9229:9229 --name=my-app-dev my-app-dev:latest /bin/bash -c 'npm install'
+# Build image: docker build --build-arg=og_host=192.168.0.55 --build-arg=og_port=8090 --tag=pa_back-end-dev:latest --file=Dockerfile.dev .
+# Create container: docker run --interactive --tty --volume=$PWD:/usr/src/app --publish=3333:3333 --publish=9229:9229 --name=pa-be-dev pa_back-end-dev:latest /bin/bash -c 'npm install'
 # Connect to container: docker exec --interactive --tty my-app-dev /bin/bash

@@ -146,7 +146,7 @@ module.exports = () => {
         unifyData = data;
       }
 
-      if (typeof unifyData === 'object' && unifyData.rootNode && unifyData.rootNode.positionIds.length) {
+      if (typeof unifyData === 'object' && unifyData.rootNode && unifyData.rootNode.positionIds && unifyData.rootNode.positionIds.length) {
         map(unifyData.rootNode.positionIds, _mapGetPositions, function(error, positions) {
           unifyData.rootNode.positions = [];
 

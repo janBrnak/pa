@@ -27,5 +27,6 @@ services:
 
 
 # docker-compose up -d
+# docker-compose up --file=docker-compose.dev.yml --project-name=pa-dev
 # docker-compose stop
 # docker-compose logs --follow

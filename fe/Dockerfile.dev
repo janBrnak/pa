@@ -11,7 +11,7 @@ ARG api_host=127.0.0.1
 ARG api_port=3333
 
 # global ENV variables
-ENV ENV=prod \
+ENV ENV=dev \
 	PORT=3000 \
 	OG_HOST=$api_host \
 	OG_PORT=$api_port
@@ -21,6 +21,9 @@ EXPOSE 3000
 
 # workdir in the container
 WORKDIR /usr/src/app
+
+# VOLUME
+# VOLUME $PWD:/usr/src/app
 
 # run commands in the image
 RUN apt-get update --yes \
@@ -39,9 +42,9 @@ RUN bower install --allow-root --force-latest && npm install
 COPY . .
 
 # run command in the container
-CMD gulp serve
+# CMD gulp serve
 
-# Build image: docker build --build-arg=api_host=127.0.0.1 --build-arg=api_port=3333 --tag=pa_front-end:latest --file=Dockerfile.prod .
-# Create container: docker run --detach --publish=3000:3000 --name=pa-fe-prod pa_front-end:latest
-# Create container: docker run --interactive --tty --publish=3000:3000 --name=pa-fe-prod pa_front-end:latest /bin/bash -c 'npm start'
-# Connect to container: docker exec --interactive --tty pa-fe-prod /bin/bash
+# Build image: docker build --build-arg=api_host=127.0.0.1 --build-arg=api_port=3333 --tag=pa_front-end-dev:latest --file=Dockerfile.dev .
+# Create container: docker run --detach --publish=3000:3000 --name=pa-fe-dev pa_front-end-dev:latest
+# Create container: docker run --interactive --tty --publish=3000:3000 --volume=$PWD:/usr/src/app --name=pa-fe-dev pa_front-end-dev:latest /bin/bash -c 'npm start'
+# Connect to container: docker exec --interactive --tty pa-fe-dev /bin/bash

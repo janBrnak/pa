@@ -18,15 +18,8 @@
                     }
                 },
                 resolve: {
-                    PortfolioData: function($resource, $http, $stateParams) {
-                        return $http({
-                            method: 'GET',
-                            url: 'http://localhost:3333/portfolios/' + ($stateParams.id || 0),
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            }
-                        });
+                    PortfolioData: function($stateParams, paApiPrtfolios) {
+                        return paApiPrtfolios.searchById($stateParams.id || 0);
                     }
                 }
             });

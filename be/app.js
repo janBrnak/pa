@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-w
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT,GET,POST,DELETE');
   next();
 });
 
@@ -32,7 +33,7 @@ app.get('/portfolios', (req, res) => {
 
 // PORTFOLIO CREATE
 app.post('/portfolios', (req, res) => {
-  var postions = req.body.positions.split(',');
+  var postions = req.body.positions ? req.body.positions.split(',') : [];
 
   portfolios.create({
     name: req.body.name, 
@@ -56,7 +57,7 @@ app.get('/portfolios/:portfolioId', (req, res) => {
 // PORTFOLIO UPDATE
 // /jax/components/PortfolioMaster/default/portfolios/{portfolioId}/versions
 app.put('/portfolios/:portfolioId', (req, res) => {
-  var postions = req.body.positions.split(',');
+  var postions = req.body.positions ? req.body.positions.split(',') : [];
 
   portfolios.update({
     id: 'DbPrt~' + req.params.portfolioId, 
@@ -69,7 +70,7 @@ app.put('/portfolios/:portfolioId', (req, res) => {
 
 // PORTFOLIO DELETE
 app.delete('/portfolios/:portfolioId', (req, res) => {
-  portfolios.delete('DbPrt~' + req.params.portfolioId, (response) => {
+  portfolios.remove('DbPrt~' + req.params.portfolioId, (response) => {
     res.json(response);
   });
 });
@@ -124,7 +125,7 @@ app.put('/positions/:positionId', (req, res) => {
 
 // POSITION DELETE
 app.delete('/positions/:positionId', (req, res) => {
-  positions.delete('DbPos~' + req.params.positionId, (response) => {
+  positions.remove('DbPos~' + req.params.positionId, (response) => {
     res.json(response);
   });
 });

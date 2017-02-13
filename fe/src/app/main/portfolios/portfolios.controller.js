@@ -6,10 +6,12 @@
         .controller('PortfoliosController', PortfoliosController);
 
     /** @ngInject */
-    function PortfoliosController($mdDialog, $mdMedia, $document, PortfoliosData) {
+    function PortfoliosController($mdDialog, $mdMedia, $document, PortfoliosData, paApiPrtfolios) {
         var vm = this;
 
         // Data
+        vm.paging = PortfoliosData.paging;
+        vm.portfolios = PortfoliosData.portfolios;
         vm.chartBar = {
             chart: {
                 type: 'discreteBarChart',
@@ -57,58 +59,6 @@
             }
         };
 
-        vm.portfolios = [
-            {
-                id: 1227,
-                name: 'Portfolio 1227',
-                defaultCountry: 'UK',
-                strategy: 'conservative',
-                useItAt: 'play-portfolio',
-                date: '2016-01-01',
-                data: [
-                    {
-                        key: "Cumulative Return",
-                        values: [
-                            { key: 'ABC', value: 5, tooltip: '3,157.29' },
-                            { key: 'T', value: 2, tooltip: '3,157.29' },
-                            { key: 'NTRS', value: 9, tooltip: '3,157.29' },
-                            { key: 'CFN', value: 7, tooltip: '3,157.29' },
-                            { key: 'VMC', value: 4, tooltip: '3,157.29' },
-                            { key: 'SYMC', value: 3, tooltip: '3,157.29' },
-                            { key: 'FSRV', value: 5, tooltip: '3,157.29' },
-                            { key: 'VMCC', value: 4, tooltip: '3,157.29' },
-                            { key: 'SYMCC', value: 3, tooltip: '3,157.29' },
-                            { key: 'FSRVV', value: 5, tooltip: '3,157.29' }
-                        ]
-                    }
-                ]
-            }, {
-                id: 1229,
-                name: 'Portfolio 1229',
-                defaultCountry: 'UK',
-                strategy: 'active-management',
-                useItAt: 'play-portfolio',
-                date: '2016-01-01',
-                data: [
-                    {
-                        key: "Cumulative Return",
-                        values: [
-                            { key: 'ABC', value: 5, tooltip: '3,157.29' },
-                            { key: 'T', value: 2, tooltip: '3,157.29' },
-                            { key: 'NTRS', value: 9, tooltip: '3,157.29' },
-                            { key: 'CFN', value: 7, tooltip: '3,157.29' },
-                            { key: 'VMC', value: 4, tooltip: '3,157.29' },
-                            { key: 'SYMC', value: 3, tooltip: '3,157.29' },
-                            { key: 'FSRV', value: 5, tooltip: '3,157.29' }
-                        ]
-                    }
-                ]
-            },
-        ];
-
-        vm.paging = PortfoliosData.data.data.paging;
-        vm.portfolios = PortfoliosData.data.data.portfolios;
-
         // Methods
         vm.managePortfolioDialog = managePortfolioDialog;
         vm.removePortfolio = removePortfolio;
@@ -150,6 +100,14 @@
                 clickOutsideToClose: false,
                 bindToController: true,
                 locals: { data: data }
+            }).then(function() { //
+
+            },  function(data) { // save
+                if (data) {
+                    paApiPrtfolios.manage(data.action, data.form).then(function(data) {
+                        vm.portfolios = data.portfolios;
+                    });
+                }
             });
         }
 
@@ -160,7 +118,9 @@
          * @returns boolean
          */
         function removePortfolio(id) {
-            console.log(id);
+            paApiPrtfolios.remove(id).then(function(data) {
+                vm.portfolios = data.portfolios;
+            });
         }
     }
 })();

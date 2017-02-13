@@ -14,14 +14,14 @@
 
         if ( vm.data ) {
             // title
-            if ( vm.data.action && vm.data.action === "edit" ) 
+            if ( vm.data.action && vm.data.action === "update" ) 
                 vm.title = "Edit Portfolio";
             else if (vm.data.action && vm.data.action === "clone")
                 vm.title = "Clone Portfolio";
 
             // portfolio
             vm.managePortfolio = {
-                id:             (typeof vm.data.id === "number" && vm.data.id > 0 ? vm.data.id : null),
+                id:             (parseInt(vm.data.id) ? parseInt(vm.data.id) : null),
                 name:           (typeof vm.data.name === "string" && vm.data.name.length > 0 ? vm.data.name : null),
                 defaultCountry: (typeof vm.data.defaultCountry === "string" && vm.data.defaultCountry.length > 0 ? vm.data.defaultCountry : null),
                 strategy:       (typeof vm.data.strategy === "string" && vm.data.strategy.length > 0 ? vm.data.strategy : null),
@@ -40,25 +40,8 @@
          * @param data object
          * @return null
          */
-        function managePortfolioAction( data ) {
-            var action = vm.data.action;
-
-            if ( action ) {
-                switch (action) {
-                    case 'add':
-                        console.log('add portfolio');
-                        break;
-                    case 'edit':
-                        console.log('edit portfolio');
-                        break;
-                    case 'clone':
-                        console.log('clone portfolio');
-                        break;
-                }
-            }
-
-            console.log(data);
-            $mdDialog.cancel();
+        function managePortfolioAction(form) {
+            $mdDialog.cancel({action: vm.data.action, form: form});
         }
 
         /**
