@@ -59,8 +59,8 @@ module.exports = {
     },
     OPTIONS: {
       protocol: 'http:',
-      hostname: process.env.OG_HOST || '127.0.0.1',
-      port: process.env.OG_PORT || 8090,
+      hostname: '80.241.212.28', // process.env.OG_HOST || '127.0.0.1',
+      port: 8080, // process.env.OG_PORT || 8090,
       path: '', // PATH | PATH_SEARCH ...
       method: null, // GET | POST | DELETE
       headers: {}
