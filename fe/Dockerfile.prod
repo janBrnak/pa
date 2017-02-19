@@ -28,3 +28,6 @@ COPY ./dist .
 COPY ./nginx.conf /etc/nginx/
 
 # service nginx start/stop/restart/status
+
+# Build image: sudo docker build --build-arg=api_host=127.0.0.1 --build-arg=api_port=3333 --tag=pa_front-end:latest --file=Dockerfile.prod .
+# Create container: sudo docker run --detach --publish=3000:80 --name=pa-fe-prod pa_front-end:latest

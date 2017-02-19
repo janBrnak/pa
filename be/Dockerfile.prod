@@ -7,7 +7,7 @@ FROM node:latest
 MAINTAINER JanBrnak
 
 # set arguments
-ARG og_host=127.0.0.1
+ARG og_host=80.241.212.28
 ARG og_port=8080
 
 # global ENV variables
@@ -39,7 +39,7 @@ COPY . .
 # run command in the container
 CMD npm start
 
-# Build image: docker build --build-arg=og_host=192.168.0.55 --build-arg=og_port=8090 --tag=pa_back-end:latest --file=Dockerfile.prod .
-# Create container: docker run --detach --publish=3333:3333 --name=pa-be-prod pa_back-end:latest
-# Create container: docker run --interactive --tty --publish=3333:3333 --name=pa-be-prod pa_back-end:latest /bin/bash -c 'npm start'
-# Connect to container: docker exec --interactive --tty pa-be-prod /bin/bash
+# Build image: sudo docker build --build-arg=og_host=80.241.212.28 --build-arg=og_port=8080 --tag=pa_back-end:latest --file=Dockerfile.prod .
+# Create container: sudo docker run --detach --publish=3333:3333 --name=pa-be-prod pa_back-end:latest
+# Create container: sudo docker run --interactive --tty --publish=3333:3333 --name=pa-be-prod pa_back-end:latest /bin/bash -c 'npm start'
+# Connect to container: sudo docker exec --interactive --tty pa-be-prod /bin/bash

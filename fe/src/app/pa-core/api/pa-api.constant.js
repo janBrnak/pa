@@ -4,7 +4,7 @@
     angular
         .module('app.core')
         .constant('paAPI', {
-            base: 'http://localhost:3333',
+            base: 'http://80.241.212.28:3333',
             portfolios: {
                 list: '/portfolios',
                 search: '',
