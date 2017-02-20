@@ -30,6 +30,7 @@
 
         // Methods
         service.saveItem = saveItem;
+        service.deleteItem = deleteItem;
         service.sortByWeight = sortByWeight;
 
         //////////
@@ -101,6 +102,51 @@
                 // Push the item into the array
                 parent.push(item);
             }
+        }
+
+        /**
+         * Delete navigation item
+         *
+         * @param path
+         */
+        function deleteItem(path)
+        {
+            if ( !angular.isString(path) )
+            {
+                $log.error('path must be a string (eg. `dashboard.project`)');
+                return;
+            }
+
+            // Locate the item by using given path
+            var item = navigation,
+                parts = path.split('.');
+
+            for ( var p = 0; p < parts.length; p++ )
+            {
+                var id = parts[p];
+
+                for ( var i = 0; i < item.length; i++ )
+                {
+                    if ( item[i]._id === id )
+                    {
+                        // If we have a matching path,
+                        // we have found our object:
+                        // remove it.
+                        if ( item[i]._path === path )
+                        {
+                            item.splice(i, 1);
+                            return true;
+                        }
+
+                        // Otherwise grab the children of
+                        // the current item and continue
+                        item = item[i].children;
+                        break;
+                    }
+                }
+            }
+
+            return false;
         }
 
         /**
@@ -229,7 +275,7 @@
 
                 if ( angular.isDefined(item.stateParams) && angular.isObject(item.stateParams) )
                 {
-                    uisref = uisref + '(' + angular.toString(item.stateParams) + ')';
+                    uisref = uisref + '(' + angular.toJson(item.stateParams) + ')';
                 }
             }
 
@@ -249,7 +295,9 @@
 
             var service = {
                 saveItem           : saveItem,
+                deleteItem         : deleteItem,
                 sort               : sortByWeight,
+                clearNavigation    : clearNavigation,
                 setActiveItem      : setActiveItem,
                 getActiveItem      : getActiveItem,
                 getNavigationObject: getNavigationObject,
@@ -264,6 +312,21 @@
             return service;
 
             //////////
+
+            /**
+             * Clear the entire navigation
+             */
+            function clearNavigation()
+            {
+                // Clear the navigation array
+                navigation = [];
+
+                // Clear the vm.navigation from main controller
+                if ( navigationScope )
+                {
+                    navigationScope.vm.navigation = [];
+                }
+            }
 
             /**
              * Set active item
@@ -290,10 +353,22 @@
             /**
              * Return navigation object
              *
+             * @param root
              * @returns {Array}
              */
-            function getNavigationObject()
+            function getNavigationObject(root)
             {
+                if ( root )
+                {
+                    for ( var i = 0; i < navigation.length; i++ )
+                    {
+                        if ( navigation[i]._id === root )
+                        {
+                            return [navigation[i]];
+                        }
+                    }
+                }
+
                 return navigation;
             }
 
@@ -359,12 +434,19 @@
     }
 
     /** @ngInject */
-    function MsNavigationController(msNavigationService)
+    function MsNavigationController($scope, msNavigationService)
     {
         var vm = this;
 
         // Data
-        vm.navigation = msNavigationService.getNavigationObject();
+        if ( $scope.root )
+        {
+            vm.navigation = msNavigationService.getNavigationObject($scope.root);
+        }
+        else
+        {
+            vm.navigation = msNavigationService.getNavigationObject();
+        }
 
         // Methods
         vm.toggleHorizontalMobileMenu = toggleHorizontalMobileMenu;
@@ -397,7 +479,8 @@
         return {
             restrict   : 'E',
             scope      : {
-                folded: '='
+                folded: '=',
+                root  : '@'
             },
             controller : 'MsNavigationController as vm',
             templateUrl: 'app/core/directives/ms-navigation/templates/vertical.html',
@@ -424,10 +507,25 @@
                      */
                     function init()
                     {
-                        // Set the folded status for the first time
-                        msNavigationService.setFolded(scope.folded);
+                        // Set the folded status for the first time.
+                        // First, we have to check if we have a folded
+                        // status available in the service already. This
+                        // will prevent navigation to act weird if we already
+                        // set the fold status, remove the navigation and
+                        // then re-initialize it, which happens if we
+                        // change to a view without a navigation and then
+                        // come back with history.back() function.
 
-                        if ( scope.folded )
+                        // If the service didn't initialize before, set
+                        // the folded status from scope, otherwise we
+                        // won't touch anything because the folded status
+                        // already set in the service...
+                        if ( msNavigationService.getFolded() === null )
+                        {
+                            msNavigationService.setFolded(scope.folded);
+                        }
+
+                        if ( msNavigationService.getFolded() )
                         {
                             // Collapse everything.
                             // This must be inside a $timeout because by the
@@ -628,9 +726,9 @@
                     };
 
                     /**
-                     * On $stateChangeSuccess
+                     * On $stateChangeStart
                      */
-                    scope.$on('$stateChangeSuccess', function ()
+                    scope.$on('$stateChangeStart', function ()
                     {
                         // Close the sidenav
                         sidenav.close();
@@ -672,6 +770,7 @@
         vm.collapse = collapse;
         vm.expand = expand;
         vm.getClass = getClass;
+        vm.isHidden = isHidden;
 
         //////////
 
@@ -940,6 +1039,21 @@
         {
             return vm.node.class;
         }
+
+        /**
+         * Check if node should be hidden
+         *
+         * @returns {boolean}
+         */
+        function isHidden()
+        {
+            if ( angular.isDefined(vm.node.hidden) && angular.isFunction(vm.node.hidden) )
+            {
+                return vm.node.hidden();
+            }
+
+            return false;
+        }
     }
 
     /** @ngInject */
@@ -1003,7 +1117,9 @@
     {
         return {
             restrict   : 'E',
-            scope      : true,
+            scope      : {
+                root: '@'
+            },
             controller : 'MsNavigationController as vm',
             templateUrl: 'app/core/directives/ms-navigation/templates/horizontal.html',
             transclude : true,

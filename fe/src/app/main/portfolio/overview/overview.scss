@@ -1,0 +1,49 @@
+#portfolio-overview {
+	& > .header {
+		& {
+			height: 160px;
+			min-height: 160px;
+			max-height: 160px;
+			position: relative;
+		}
+		.add-file-button {
+			position: absolute;
+			bottom: -32px;
+			right: 16px;
+		}
+		.breadcrumb {
+			a {
+				color: rgba(0,0,0,0.7);
+			}
+		}
+	}
+
+	& > .content {
+		& > .portfolio-summary {
+			& > div:first-child {
+				& {
+					border-bottom: 1px solid rgba(0,0,0,0.2);
+				}
+			}
+			& > div:last-child {
+				& > div:first-child {
+					font-size: 36px;
+					font-weight: normal;
+				}
+				& > div:first-child ~ div {
+					& {
+						font-size: 24px;
+					}
+					&.summary-up {
+						& { color: green; }
+						& > .icon { color: green; }
+					}
+					&.summary-down {
+						& { color: red; }
+						& > .icon { color: red; }
+					}
+				}
+			}
+		}
+	}
+}

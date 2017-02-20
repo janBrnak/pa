@@ -16,4 +16,27 @@
         border-top: 1px solid rgba(0, 0, 0, 0.12);
         background-color: rgba(0, 0, 0, 0.03);
     }
+
+    &-form {
+    	&-horizont {
+			label {
+				color: rgba(0,0,0,0.5);
+			}
+			&-text {
+				text-align: center;
+				padding-top: 12px;
+				color: rgba(0, 0, 0, 0.5);
+			}
+    	}
+    	&-risk-tolerance {
+    		label {
+				color: rgba(0,0,0,0.5);
+			}
+			&-text {
+				text-align: center;
+				padding-top: 12px;
+				color: rgba(0, 0, 0, 0.5);
+			}
+    	}
+    }
 }

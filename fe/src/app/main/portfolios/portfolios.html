@@ -20,7 +20,7 @@
         <div class="md-headline mb-16">List of Portfolios</div>
         <md-whiteframe ng-repeat="portfolio in vm.portfolios" class="portfolio-item md-whiteframe-1dp mb-10 p-8" layout="row" layout-wrap>
             <div layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
-                <div class="md-title" flex><a ng-href="/portfolio/{{portfolio.id}}">{{portfolio.name}}</a></div>
+                <div class="md-title" flex><a ng-href="/portfolio/{{portfolio.id}}/overview">{{portfolio.name}}</a></div>
                 <div class="" layout="row" layout-align="start center">
                     <span class="h4 secondary-text text-truncate">6.6 K ( NO CASH )</span>
                     <span class="h4 ml-8">7.00 <i class="icon icon-trending-down s16"></i> 11%</span>
@@ -34,7 +34,7 @@
                 <nvd3 options="vm.chartBar" data="portfolio.data"></nvd3>
             </div>
             <div layout="row" layout-align-gt-sm="end center" flex="100" flex-gt-sm="40" flex-gt-md="25">
-                <md-button class="md-icon-button" aria-label="View" ng-href="/portfolio/{{portfolio.id}}">
+                <md-button class="md-icon-button" aria-label="View" ng-href="/portfolio/{{portfolio.id}}/overview">
                     <md-icon md-font-icon="icon-eye"></md-icon>
                     <md-tooltip><span>View</span></md-tooltip>
                 </md-button>

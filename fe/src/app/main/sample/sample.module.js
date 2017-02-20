@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider
@@ -20,15 +20,18 @@
                     }
                 },
                 resolve: {
-                    SampleData: function (apiResolver)
+                    SampleData: function (msApi)
                     {
-                        return apiResolver.resolve('sample@get');
+                        return msApi.resolve('sample@get');
                     }
                 }
             });
 
         // Translation
         $translatePartialLoaderProvider.addPart('app/main/sample');
+
+        // Api
+        msApiProvider.register('sample', ['app/data/sample/sample.json']);
 
         // Navigation
         msNavigationServiceProvider.saveItem('fuse', {
@@ -38,14 +41,14 @@
         });
 
         msNavigationServiceProvider.saveItem('fuse.sample', {
-            title      : 'Sample',
-            icon       : 'icon-tile-four',
-            state      : 'app.sample',
+            title    : 'Sample',
+            icon     : 'icon-tile-four',
+            state    : 'app.sample',
             /*stateParams: {
                 'param1': 'page'
-            },*/
-            translation: 'SAMPLE.SAMPLE_NAV',
-            weight     : 1
+             },*/
+            translate: 'SAMPLE.SAMPLE_NAV',
+            weight   : 1
         });
     }
 })();

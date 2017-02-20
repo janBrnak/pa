@@ -10,16 +10,40 @@
 
     <!-- CONTENT -->
     <div class="content">
+        <!-- SUMMARY -->
+        <div class="md-headline mt-8 mb-8">Summary</div>
+        <div class="portfolio-summary md-whiteframe-2dp white-bg" layout="column" layout-padding>
+            <div class="portfolio-summary-head" layout="row" flex>
+                <div flex="25" flex-sm="33" flex-xs="50"></div>
+                <div flex="25" flex-sm="33" flex-xs="50" layout="row" layout-align="center center">Latest Change</div>
+                <div flex="25" flex-sm="33" layout="row" layout-align="center center" hide-xs>March Gain/Loss</div>
+                <div flex="25" layout="row" layout-align="center center" hide-sm hide-xs>2016 Gain/Loss</div>
+            </div>
+            <div class="portfolio-summary-content" layout="row" flex>
+                <div flex="25" flex-sm="33" flex-xs="50" layout="row" layout-align="center center">90,826</div>
+                <div flex="25" flex-sm="33" flex-xs="50" class="summary-up" layout="row" layout-align="center center">
+                    1,393&nbsp;<i class="icon icon-trending-up s24"></i>&nbsp;1.59%
+                </div>
+                <div flex="25" flex-sm="33" class="summary-up" layout="row" layout-align="center center" hide-xs>
+                    1,092&nbsp;<i class="icon icon-trending-up s24"></i>&nbsp;1.24%
+                </div>
+                <div flex="25" class="summary-down" layout="row" layout-align="center center" hide-sm hide-xs>
+                    3,290&nbsp;<i class="icon icon-trending-down s24"></i>&nbsp;3.57%
+                </div>
+            </div>
+        </div>
+        <!-- /SUMMARY -->
+
         <!-- PORTFOLIOS WIDGET GROUP -->
-        <div class="md-headline">Top Portfolios</div>
-        <dvi class="widget-group" layout="row" flex="100" layout-wrap>
+        <div class="md-headline mt-24 mb-8">Top Portfolios</div>
+        <div class="widget-group" layout="row" flex="100" layout-wrap>
             <!-- WIDGETS -->
             <ms-widget ng-repeat="portfolio in vm.portfolios" flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
 
                 <!-- Front -->
                 <ms-widget-front class="white-bg">
                     <div class="pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
-                        <div class="h2"><a ng-href="/portfolio/{{portfolio.id}}">{{portfolio.name}}</a></div>
+                        <div class="h2"><a ng-href="/portfolio/{{portfolio.id}}/overview">{{portfolio.name}}</a></div>
                     </div>
 
                     <div class="pt-8 pb-8" layout="column" layout-align="center center">
@@ -54,6 +78,20 @@
             <!-- / WIDGETS -->
         </div>
         <!-- / PORTFOLIOS WIDGET GROUP -->
+
+        <!-- POSITIONS WIDGET GROUP -->
+        <div class="md-headline mt-24 mb-8">Top Portfolios Performance</div>
+        <div class="top-portfolios-performance md-whiteframe-2dp white-bg" layout="column" layout-padding>
+            <nvd3 options="vm.lineChartPortfolio" data="vm.lineChartPortfolioData"></nvd3>
+        </div>
+        <!-- / POSITIONS WIDGET GROUP -->
+
+        <!-- PORTFOLIO RELATED NEWS -->
+        <!-- <div class="md-headline mt-24 mb-8">Portfolio Related News</div>
+        <div class="widget-group" layout="row" flex="100" layout-wrap>
+           
+        </div> -->
+        <!-- / PORTFOLIO RELATED NEWS -->
 	</div>
     <!-- /CONTENT -->
 </div>

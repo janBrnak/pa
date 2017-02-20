@@ -40,10 +40,9 @@ gulp.task('html-dev', ['inject'], function ()
     var htmlFilter = $.filter('*.html', {restore: true});
     var jsFilter = $.filter('**/*.js', {restore: true});
     var cssFilter = $.filter('**/*.css', {restore: true});
-    var assets;
 
     return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
-        .pipe(assets = $.useref.assets())
+        .pipe($.useref())
         .pipe(jsFilter)
         .pipe($.ngAnnotate())
         .pipe(jsFilter.restore)
@@ -51,8 +50,6 @@ gulp.task('html-dev', ['inject'], function ()
         .pipe($.sourcemaps.init())
         .pipe($.sourcemaps.write('maps'))
         .pipe(cssFilter.restore)
-        .pipe(assets.restore())
-        .pipe($.useref())
         .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
         .pipe($.size({
             title    : path.join(conf.paths.dist, '/'),

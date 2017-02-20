@@ -12,10 +12,11 @@
         var vm = this;
 
         // Data
-        vm.bodyEl = angular.element('body');
         $rootScope.global = {
             search: ''
         };
+
+        vm.bodyEl = angular.element('body');
         vm.userStatusOptions = [
             {
                 'title': 'Online',
@@ -43,26 +44,26 @@
                 'color': '#616161'
             }
         ];
-        vm.languages = [
-            {
+        vm.languages = {
+            en: {
                 'title'      : 'English',
                 'translation': 'TOOLBAR.ENGLISH',
                 'code'       : 'en',
-                'flag'       : 'gb'
+                'flag'       : 'us'
             },
-            {
+            es: {
                 'title'      : 'Spanish',
                 'translation': 'TOOLBAR.SPANISH',
                 'code'       : 'es',
                 'flag'       : 'es'
             },
-            {
+            tr: {
                 'title'      : 'Turkish',
                 'translation': 'TOOLBAR.TURKISH',
                 'code'       : 'tr',
                 'flag'       : 'tr'
             }
-        ];
+        };
 
         // Methods
         vm.toggleSidenav = toggleSidenav;
@@ -73,8 +74,20 @@
 
         //////////
 
-        vm.userStatus = vm.userStatusOptions[0];
-        vm.selectedLanguage = vm.languages[0];
+        init();
+
+        /**
+         * Initialize
+         */
+        function init()
+        {
+            // Select the first status as a default
+            vm.userStatus = vm.userStatusOptions[0];
+
+            // Get the selected language directly from angular-translate module setting
+            vm.selectedLanguage = vm.languages[$translate.preferredLanguage()];
+        }
+
 
         /**
          * Toggle sidenav
@@ -100,7 +113,7 @@
          */
         function logout()
         {
-
+            // Do logout here..
         }
 
         /**
@@ -110,7 +123,18 @@
         {
             vm.selectedLanguage = lang;
 
-            // Show temporary message if user selects a language other than English
+            /**
+             * Show temporary message if user selects a language other than English
+             *
+             * angular-translate module will try to load language specific json files
+             * as soon as you change the language. And because we don't have them, there
+             * will be a lot of errors in the page potentially breaking couple functions
+             * of the template.
+             *
+             * To prevent that from happening, we added a simple "return;" statement at the
+             * end of this if block. If you have all the translation files, remove this if
+             * block and the translations should work without any problems.
+             */
             if ( lang.code !== 'en' )
             {
                 var message = 'Fuse supports translations through angular-translate module, but currently we do not have any translations other than English language. If you want to help us, send us a message through ThemeForest profile page.';
@@ -125,7 +149,7 @@
                 return;
             }
 
-            //Change the language
+            // Change the language
             $translate.use(lang.code);
         }
 

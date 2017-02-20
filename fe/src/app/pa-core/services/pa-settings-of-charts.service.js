@@ -9,7 +9,9 @@
 	/** @ngInject */
 	function paSettingsOfCharts() {
 		var service = {
-            pieChartPositions: pieChartPositions
+            pieChartPositions: pieChartPositions,
+            lineChartPositions: lineChartPositions,
+            lineChartPortfolio: lineChartPortfolio,
         };
 
         return service;
@@ -31,7 +33,7 @@
                 showLabels: true,
                 labelSunbeamLayout: false,
                 labelThreshold: 0.01,
-                donutLabelsOutside: true,
+                labelsOutside: true,
                 donut: false,
                 transitionDuration: 500,
                 showLegend: false,
@@ -81,6 +83,45 @@
 						chart[key] = options[key];
             	}
             }
+
+            return {chart: chart};
+        }
+
+        /**
+         * Setting line chart with positions
+         *
+         * @param options {object}
+         * @returns {object}
+         */
+        function lineChartPositions ( options ) {
+            var chart = {};
+
+            return {chart: chart};
+        }
+
+        /**
+         * Setting line chart which comper portfolio with indexes like S&P 500, Dow Jones, Nasdaq... 
+         *
+         * @param options {object}
+         * @returns {object}
+         */
+        function lineChartPortfolio ( options ) {
+            var chart = {
+                    "type": "lineWithFocusChart",
+                    "height": 450,
+                    "margin": {
+                        "top": 20,
+                        "right": 20,
+                        "bottom": 60,
+                        "left": 40
+                    },
+                    "duration": 500,
+                    "useInteractiveGuideline": true,
+                    "xAxis": {},
+                    "x2Axis": {},
+                    "yAxis": {},
+                    "y2Axis": {}
+                };
 
             return {chart: chart};
         }

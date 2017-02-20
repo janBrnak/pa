@@ -1,0 +1,75 @@
+<div id="portfolio-create" class="page-layout simple fullwidth doc-page">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start">
+            <div class="title">Create Portfolio</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">        
+        <!-- WIDGETS GROUP -->
+        <div class="widget-group" layout="row" flex="100" layout-wrap>
+            <!-- WIDGETS -->
+            <ms-widget class="create-manual-portfolio" flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+
+                <!-- Front -->
+                <ms-widget-front class="white-bg">
+                    <div class="create-manual-portfolio-head md-accent-bg pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
+                        <div class="h2" ng-click="vm.createManualPortfolio()" ng-style="{'cursor': 'pointer'}">Create manual portfolio</div>
+                        <md-icon class="mr-5" md-font-icon="icon-information-outline" aria-label="" ng-click="flipWidget()" ng-style="{'color': '#ffffff', 'font-size': 24 + 'px', 'width': 24 + 'px', 'height': 24 + 'px', 'line-height': 24 + 'px', 'font-weight': 'bold', 'cursor': 'pointer'}"></md-icon>
+                    </div>
+                    <div class="create-manual-portfolio-content pt-24 pb-24" layout="column" layout-align="center center" ng-click="vm.createManualPortfolio()">
+                        <md-icon md-font-icon="icon-plus" aria-label="" ng-style="{'font-size': 128 + 'px', 'width': 128 + 'px', 'height': 128 + 'px', 'line-height': 128 + 'px'}"></md-icon>
+                    </div>
+                </ms-widget-front>
+                <!-- / Front -->
+
+                <!-- Back -->
+                <ms-widget-back class="white-bg">
+                    <div class="md-accent-bg pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
+                        <div class="h2" ng-click="vm.createManualPortfolio()" ng-style="{'cursor': 'pointer'}">Create manual portfolio</div>
+                        <md-icon class="mr-5" md-font-icon="icon-close" aria-label="" ng-click="flipWidget()" ng-style="{'color': '#ffffff', 'font-size': 24 + 'px', 'width': 24 + 'px', 'height': 24 + 'px', 'line-height': 24 + 'px', 'font-weight': 'bold', 'cursor': 'pointer'}"></md-icon>
+                    </div>
+                    <div class="font-size-14 p-24" layout="column" layout-align="center center">
+                        Use this option to create an empty portfolio. After you create your new portfolio you can add positions manually or import your existing holdings.
+                    </div>
+                </ms-widget-back>
+                <!-- / Back -->
+
+            </ms-widget>
+            <ms-widget class="create-model-portfolio" flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+
+                <!-- Front -->
+                <ms-widget-front class="white-bg">
+                    <div class="create-model-portfolio-head md-accent-bg pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
+                        <div class="h2" ng-click="vm.createModelPortfolio('add-model')" ng-style="{'cursor': 'pointer'}">Get instant proposal</div>
+                        <md-icon class="mr-5" md-font-icon="icon-information-outline" aria-label="" ng-click="flipWidget()" ng-style="{'color': '#ffffff', 'font-size': 24 + 'px', 'width': 24 + 'px', 'height': 24 + 'px', 'line-height': 24 + 'px', 'font-weight': 'bold', 'cursor': 'pointer'}"></md-icon>
+                    </div>
+                    <div class="create-model-portfolio-content pt-24 pb-24" layout="column" layout-align="center center" ng-click="vm.createModelPortfolio('add-model')">
+                        <md-icon md-font-icon="icon-folder-plus" aria-label="" ng-style="{'font-size': 128 + 'px', 'width': 128 + 'px', 'height': 128 + 'px', 'line-height': 128 + 'px'}"></md-icon>
+                    </div>
+                </ms-widget-front>
+                <!-- / Front -->
+
+                <!-- Back -->
+                <ms-widget-back class="white-bg">
+                    <div class="md-accent-bg pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
+                        <div class="h2" ng-click="vm.createModelPortfolio('add-model')" ng-style="{'cursor': 'pointer'}">Get instant proposal</div>
+                        <md-icon class="mr-5" md-font-icon="icon-close" aria-label="" ng-click="flipWidget()" ng-style="{'color': '#ffffff', 'font-size': 24 + 'px', 'width': 24 + 'px', 'height': 24 + 'px', 'line-height': 24 + 'px', 'font-weight': 'bold', 'cursor': 'pointer'}"></md-icon>
+                    </div>
+                    <div class="font-size-14 p-24" layout="column" layout-align="center center">
+                        Use this option to let us generate optimized portfolio proposal for you based on your current investing preferences.
+                    </div>
+                </ms-widget-back>
+                <!-- / Back -->
+
+            </ms-widget>
+            <!-- /WIDGETS -->
+        </div>
+        <!-- /WIDGETS GROUP -->
+	</div>
+    <!-- /CONTENT -->
+</div>

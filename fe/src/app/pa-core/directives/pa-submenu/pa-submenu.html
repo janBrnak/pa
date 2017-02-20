@@ -1,0 +1,3 @@
+<ul class="pa-submenu">
+	<li ng-repeat="item in $ctrl.items" ng-class="{active: {{$ctrl.active===item.key}}}"><a ng-href="{{item.href}}" title="{{item.title}}">{{item.title}}</a></li>
+</ul>

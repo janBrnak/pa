@@ -11,7 +11,7 @@
             // Core
             'app.core',
 
-            // PA - Core
+            // PA - Core custom created
             'app.pa-core',
 
             // Navigation
@@ -26,11 +26,15 @@
             // Sample
             // 'app.sample',
 
+            // Auth
+            'app.auth',
+
             // Dashboard
             'app.dashboard',
 
             // Portfolios
             'app.portfolios',
+            'app.portfolio-create',
             'app.portfolio',
         ]);
 })();

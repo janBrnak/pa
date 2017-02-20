@@ -14,10 +14,12 @@
         
         <!-- DIALOG CONTENT -->
         <md-dialog-content>
-            <!-- id -->
-            <input type="hidden" name="id" ng-model="vm.managePortfolio.id">
-            <!-- / id -->
+            <!-- name -->
+            <input type="hidden" name="name" ng-model="vm.managePortfolio.id">
 
+            <input type="hidden" name="value" ng-model="vm.managePortfolio.value" value="1">
+
+            <!-- name -->
             <!-- name -->
             <div layout="row" flex>
                 <md-input-container flex class="mb-0">
@@ -39,28 +41,64 @@
                 </md-select>
             </div>
             <!-- / defaultCountry -->
+            
+            <div ng-if="vm.type==='manual'">
+                <!-- strategy -->
+                <div layout="row" flex>
+                    <md-select placeholder="Strategy" ng-model="vm.managePortfolio.strategy" flex required>
+                        <md-option value="balanced">Balanced</md-option>
+                        <md-option value="active-management">Active Management</md-option>
+                        <md-option value="conservative">Conservative</md-option>
+                        <md-option value="speculative">Speculative</md-option>
+                        <md-option value="tactical-growth">Tactical Growth</md-option>
+                    </md-select>
+                </div>
+                <!-- / strategy -->
 
-            <!-- strategy -->
-            <div layout="row" flex>
-                <md-select placeholder="Strategy" ng-model="vm.managePortfolio.strategy" flex required>
-                    <md-option value="balanced">Balanced</md-option>
-                    <md-option value="active-management">Active Management</md-option>
-                    <md-option value="conservative">Conservative</md-option>
-                    <md-option value="speculative">Speculative</md-option>
-                    <md-option value="tactical-growth">Tactical Growth</md-option>
-                </md-select>
+                <!-- useItAt -->
+                <div layout="row" flex>
+                    <md-select placeholder="Use It As" ng-model="vm.managePortfolio.useItAt" flex required>
+                        <md-option value="play-portfolio">Play Portfolio</md-option>
+                        <md-option value="kids-fund">Kids Fund</md-option>
+                        <md-option value="moms-savings">Mom's Savings</md-option>
+                    </md-select>
+                </div>
+                <!-- / useItAt -->
             </div>
-            <!-- / strategy -->
+            
+            <div ng-if="vm.type==='model'">
+                <!-- money -->
+                <md-input-container class="md-block">
+                    <input type="number" name="budget" step="100" min="1000" max="999999" placeholder="Budget (USD)" ng-model="vm.managePortfolio.budget" ng-pattern="/^[0-9]+$/" required>
+                    <div ng-messages="managePortfolio.budget" multiple md-auto-hide="false">
+                        <div ng-message="required">ERROR: required</div>
+                        <div ng-message="pattern">ERROR: pattern</div>
+                        <div ng-message="min">ERROR: min</div>
+                        <div ng-message="max">ERROR: max</div>
+                    </div>
+                </md-input-container>
+                <!-- / money -->
 
-            <!-- useItAt -->
-            <div layout="row" flex>
-                <md-select placeholder="Use It As" ng-model="vm.managePortfolio.useItAt" flex required>
-                    <md-option value="play-portfolio">Play Portfolio</md-option>
-                    <md-option value="kids-fund">Kids Fund</md-option>
-                    <md-option value="moms-savings">Mom's Savings</md-option>
-                </md-select>
+                <!-- horizont -->
+                <div class="manage-portfolio-form-horizont mb-16" layout="column" flex>
+                    <div flex><label>Investment Horizon</label></div>
+                    <div layout="row" flex>
+                        <div flex="70"><md-slider ng-model="vm.managePortfolio.horizont" aria-label="Investment Horizon" step="1" min="1" max="24" flex></md-slider></div>
+                        <div class="manage-portfolio-form-horizont-text" flex>{{vm.managePortfolio.horizont}} months</div>
+                    </div>
+                </div>
+                <!-- / horizont -->
+
+                <!-- risk tolerance -->
+                <div class="manage-portfolio-form-risk-tolerance" layout="column" flex>
+                    <div flex><label>Risk Tolerance</label></div>
+                    <div layout="row" flex>
+                        <div flex="70"><md-slider ng-model="vm.managePortfolio.riskTolerance" aria-label="Risk Tolerance" step="5" min="0" max="100"></md-slider></div>
+                        <div class="manage-portfolio-form-risk-tolerance-text" flex>{{vm.managePortfolio.riskTolerance}} %</div>
+                    </div>
+                </div>
+                <!-- / risk tolerance -->
             </div>
-            <!-- / useItAt -->
         </md-dialog-content>
         <!-- / DIALOG CONTENT -->
         

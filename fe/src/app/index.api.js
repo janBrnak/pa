@@ -27,9 +27,9 @@
          *
          *      api.getBlogById = $resource('http://api.example.com/blog/:id', {id: '@id'});
          *
-         * You can also define your custom methods. Custom method definitions allows you to
-         * add hardcoded parameters to your API calls that you want them to be sent every
-         * time you make that API call:
+         * You can also define your custom methods. Custom method definitions allow you to
+         * add hardcoded parameters to your API calls that you want to sent every time you
+         * make that API call:
          *
          *      api.getBlogById = $resource('http://api.example.com/blog/:id', {id: '@id'}, {
          *         'getFromHomeCategory' : {method: 'GET', params: {blogCategory: 'home'}}
@@ -40,12 +40,17 @@
          * way that we have created for you to packing your related API urls together:
          *
          *      api.blog = {
-         *          list     : $resource('http://api.example.com/blog);
-         *          getById  : $resource('http://api.example.com/blog/:id', {id: '@id'});
-         *          getByDate: $resource('http://api.example.com/blog/:date', {id: '@date'},
-         *              'get': {method: 'GET', params: {getByDate: true}}
-         *          );
-         *      }
+         *                   list     : $resource('http://api.example.com/blog'),
+         *                   getById  : $resource('http://api.example.com/blog/:id', {id: '@id'}),
+         *                   getByDate: $resource('http://api.example.com/blog/:date', {id: '@date'}, {
+         *                       get: {
+         *                            method: 'GET',
+         *                            params: {
+         *                                getByDate: true
+         *                            }
+         *                       }
+         *                   })
+         *       }
          *
          * If you look at the last example from above, we overrode the 'get' method to put a
          * hardcoded parameter. Now every time we make the "getByDate" call, the {getByDate: true}
@@ -115,7 +120,7 @@
          *          );
          *      }
          *
-         * Because we are directly using $resource servive, all your API calls will return a
+         * Because we are directly using $resource service, all your API calls will return a
          * $promise object.
          *
          * --
@@ -175,18 +180,7 @@
         // Base Url
         api.baseUrl = 'app/data/';
 
-        api.sample = $resource(api.baseUrl + 'sample/sample.json');
-        api.dashboard = $resource(api.baseUrl + 'dashboard/dashboard.json');
-        api.portfolios = $resource(api.baseUrl + 'portfolios/portfolios.json');
-
-        api.quickPanel = {
-            activities: $resource(api.baseUrl + 'quick-panel/activities.json'),
-            contacts  : $resource(api.baseUrl + 'quick-panel/contacts.json'),
-            events    : $resource(api.baseUrl + 'quick-panel/events.json'),
-            notes     : $resource(api.baseUrl + 'quick-panel/notes.json')
-        };
-
-        api.rest = 'http://localhost:3000/';
+        // api.sample = $resource(api.baseUrl + 'sample/sample.json');
 
         return api;
     }

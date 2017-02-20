@@ -28,18 +28,12 @@
         $translatePartialLoaderProvider.addPart('app/main/portfolios');
 
         // Navigation
-        msNavigationServiceProvider.saveItem('fuse', {
-            title : 'PORTFOLIOS',
-            group : true,
-            weight: 1
-        });
-
-        msNavigationServiceProvider.saveItem('fuse.portfolios', {
+        msNavigationServiceProvider.saveItem('portfolios', {
             title      : 'Portfolios',
             icon       : 'icon-view-list',
             state      : 'app.portfolios',
             translation: 'PORTFOLIOS.PORTFOLIOS_NAV',
-            weight     : 1
+            weight     : 3
         });
     }
 })();

@@ -18,8 +18,21 @@
                 vm.title = "Edit Position";
 
             // position
-            vm.managePosition = {
-                0: { symbol: '', shares: null, price: null, date: new Date() }
+            vm.managePosition = [
+                { id: null, symbol: '', shares: null, price: null, date: new Date() }
+            ];
+
+            if (vm.data && vm.data.positions && vm.data.positions.length) {
+                vm.managePosition = [];
+                vm.data.positions.forEach(function(position) {
+                    vm.managePosition.push({
+                        id: position.id, 
+                        symbol: position.symbol, 
+                        shares: position.shares, 
+                        price: 100, 
+                        date: new Date() 
+                    });
+                });
             }
         }
 
@@ -27,6 +40,8 @@
         vm.managePositionAction = managePositionAction;
         vm.clonePositionEmpty = clonePositionEmpty;
         vm.closeDialog = closeDialog;
+        vm.querySearch = querySearch;
+        vm.selectedItemChange = selectedItemChange;
 
         //////////
 
@@ -75,6 +90,21 @@
          */
         function closeDialog() {
             $mdDialog.cancel();
+        }
+
+        function querySearch () {
+            var positions = [];
+
+            positions.push({id: 1000, symbol: 'SPY', quantity: null});
+            positions.push({id: 1001, symbol: 'EWG', quantity: null});
+            positions.push({id: 1002, symbol: 'XLV', quantity: null});
+            positions.push({id: 1003, symbol: 'DIA', quantity: null});
+
+            return positions;
+        }
+
+        function selectedItemChange(item) {
+
         }
     }
 })();

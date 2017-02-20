@@ -1,0 +1,57 @@
+.positions-table {
+	& {
+		
+	}
+	&-head {
+		& {
+			font-weight: bold;
+			color: rgba(0,0,0,0.54);
+		}
+		&-th {
+			& {
+				padding: 8px 8px;
+			}
+			&-title {
+				& {
+					font-size: 14px;
+				}
+				&.full {
+					padding-top: 9px;
+					padding-bottom: 9px;
+				}
+				&.sorting span {
+					cursor: pointer;
+					border-bottom: 1px dotted rgba(0,0,0,0.8);
+				}
+			}
+			&-subtitle {
+				& {
+
+				}
+				&.sorting span {
+					cursor: pointer;
+					border-bottom: 1px dotted rgba(0,0,0,0.8);
+				}
+			}
+		}
+	}
+	&-body {
+		& {
+
+		}
+		&-tr {
+			& {
+				border-top: 1px solid rgba(0, 0, 0, 0.2);
+			}
+			&:nth-child(even) {
+				background-color: #fafafa;
+			}
+			&:hover {
+				background-color: #f5f5f5;
+			}
+			&-td {
+				padding: 16px 8px;
+			}
+		}
+	}
+}

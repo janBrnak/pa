@@ -1,0 +1,18 @@
+<div class="positions-table" layout="column">
+	<div class="positions-table-head" layout="row">
+		<div id="th-{{key}}" class="positions-table-head-th" flex="{{::th.layout.flex}}" ng-repeat="(key, th) in $ctrl.data.head">
+			<div class="positions-table-head-th-title {{th.layout.class}}" ng-class="{full: !th.sub, sorting: !th.sub}" ng-click="$ctrl.orderByKey(key)"><span>{{th.name}}</span></div>
+			<div class="positions-table-head-th-subtitle" ng-class="{sorting: th.sub}" ng-if="th.sub" layout="row">
+				<div id="th-sub-{{key}}" class="{{sub.layout.class}}" flex="{{::sub.layout.flex}}" ng-click="$ctrl.orderByKey(key)" ng-repeat="(key, sub) in th.sub"><span>{{sub.name}}</span></div>
+			</div>
+		</div>
+	</div>
+	<div class="positions-table-body" layout="column">
+		<div id="tr-{{id}}" class="positions-table-body-tr" ng-repeat="(id, td) in $ctrl.data.body" layout="row">
+			<div id="tr-td-{{id}}-{{key}}" class="positions-table-body-tr-td {{::$ctrl.data.bodyLayout[key].class}}" flex="{{::$ctrl.data.bodyLayout[key].flex}}" ng-repeat="key in $ctrl.keys">{{td[key]}}</div>
+		</div>
+	</div>
+	<div class="positions-table-footer" layout="row">
+		
+	</div>
+</div>

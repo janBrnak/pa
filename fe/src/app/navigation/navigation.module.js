@@ -7,9 +7,9 @@
         .config(config);
 
     /** @ngInject */
-    function config($translatePartialLoaderProvider)
+    function config()
     {
-        $translatePartialLoaderProvider.addPart('app/navigation');
+        
     }
 
 })();

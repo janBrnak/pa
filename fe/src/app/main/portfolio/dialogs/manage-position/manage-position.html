@@ -16,29 +16,29 @@
         <md-dialog-content>
             <div class="manage-positions-group pt-16">
 
-                <div id="manage-position-item-{{i}}" class="manage-position-item" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]" layout>
+                <div id="manage-position-item-{{$index}}" class="manage-position-item" ng-repeat="position in vm.managePosition" layout>
                     <div layout="row" flex>
                         <!-- Symbol -->
                         <md-autocomplete flex
                             ng-disabled="false"
-                            ng-model="vm.managePosition[i].symbol"
+                            ng-model="position.symbol"
                             ng-pattern="/^[a-zA-Z]+$/"
                             md-no-cache="false"
-                            md-selected-item=""
+                            md-selected-item="position.symbol"
                             md-search-text-change=""
-                            md-search-text=""
-                            md-selected-item-change=""
-                            md-items=""
-                            md-item-text=""
+                            md-search-text="vm.searchText"
+                            md-selected-item-change="position.id=item.id;position.symbol=item.symbol"
+                            md-items="item in vm.querySearch(vm.searchText)"
+                            md-item-text="item.symbol"
                             md-input-name="symbol"
-                            md-min-length="2"
+                            md-min-length="0"
                             md-input-maxlength="16"
                             md-floating-label="Search Symbol">
                             <md-item-template>
-                                <span md-highlight-text="" md-highlight-flags="^i"></span>
+                                {{item.symbol}}
                             </md-item-template>
                             <md-not-found>ERROR: Not found</md-not-found>
-                            <div ng-messages="managePosition[i].symbol.$error" ng-show="managePosition[i].symbol.$touched" multiple role="alert">
+                            <div ng-messages="managePosition[$index].symbol.$error" ng-show="managePosition[$index].symbol.$touched" multiple role="alert">
                                 <div ng-message="required"><span>ERROR: required</span></div>
                                 <div ng-message="min"><span>ERROR: min</span></div>
                                 <div ng-message="max"><span>ERROR: max</span></div>
@@ -47,8 +47,8 @@
                         <!-- / Symbol -->
                         <!-- Shares -->
                         <md-input-container class="mb-0" flex>
-                            <input type="number" step="any" name="shares" ng-model="vm.managePosition[i].shares" min="1" max="999" ng-pattern="/^[0-9]+$/" placeholder="Shares" required />
-                            <div ng-messages="managePosition[i].shares.$error" ng-show="managePosition[i].shares.$touched" multiple role="alert">
+                            <input type="number" step="any" name="shares" ng-model="position.shares" min="1" max="999" ng-pattern="/^[0-9]+$/" placeholder="Shares" required />
+                            <div ng-messages="managePosition[$index].shares.$error" ng-show="managePosition[$index].shares.$touched" multiple role="alert">
                                 <div ng-message="required"><span>ERROR: required</span></div>
                                 <div ng-message="min"><span>ERROR: min</span></div>
                                 <div ng-message="max"><span>ERROR: max</span></div>
@@ -58,8 +58,8 @@
                         <!-- / Shares -->
                         <!-- Price -->
                         <md-input-container class="mb-0" flex>
-                            <input type="number" step="any" name="price" ng-model="vm.managePosition[i].price" min="1" max="9999" ng-pattern="/^[0-9]+$/" placeholder="Price" required />
-                            <div ng-messages="managePosition[i].price.$error" ng-show="managePosition[i].price.$touched" multiple role="alert">
+                            <input type="number" step="any" name="price" ng-model="position.price" min="1" max="9999" ng-pattern="/^[0-9]+$/" placeholder="Price" required />
+                            <div ng-messages="managePosition[$index].price.$error" ng-show="managePosition[$index].price.$touched" multiple role="alert">
                                 <div ng-message="required"><span>ERROR: required</span></div>
                                 <div ng-message="min"><span>ERROR: min</span></div>
                                 <div ng-message="max"><span>ERROR: max</span></div>
@@ -68,7 +68,7 @@
                         </md-input-container>
                         <!-- / Price -->
                         <!-- Date -->
-                        <md-datepicker ng-model="vm.managePosition[i].date" md-placeholder="Enter date" flex style="background: none; margin-top: 12px;"></md-datepicker>
+                        <md-datepicker ng-model="position.date" md-placeholder="Enter date" flex style="background: none; margin-top: 12px;"></md-datepicker>
                         <!-- / Date -->
                     </div>
                 </div>

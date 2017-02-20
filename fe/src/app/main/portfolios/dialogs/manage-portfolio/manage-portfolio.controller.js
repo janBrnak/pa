@@ -6,18 +6,25 @@
         .controller('ManagePortfolioController', ManagePortfolioController);
 
     /** @ngInject */
-    function ManagePortfolioController($mdDialog) {
+    function ManagePortfolioController($mdDialog, $location) {
         var vm = this;
 
         // Data
         vm.title = "Create Portfolio";
+        vm.type = 'manual';     // manual || model
 
         if ( vm.data ) {
             // title
-            if ( vm.data.action && vm.data.action === "update" ) 
+            if ( vm.data.action && vm.data.action === "update" ) {
                 vm.title = "Edit Portfolio";
-            else if (vm.data.action && vm.data.action === "clone")
+            }
+            else if (vm.data.action && vm.data.action === "clone") {
                 vm.title = "Clone Portfolio";
+            }
+            else if (vm.data.action && vm.data.action === "add-model") {
+                vm.title = "Create Model Portfolio";
+                vm.type = 'model'
+            }
 
             // portfolio
             vm.managePortfolio = {
@@ -26,6 +33,15 @@
                 defaultCountry: (typeof vm.data.defaultCountry === "string" && vm.data.defaultCountry.length > 0 ? vm.data.defaultCountry : null),
                 strategy:       (typeof vm.data.strategy === "string" && vm.data.strategy.length > 0 ? vm.data.strategy : null),
                 useItAt:        (typeof vm.data.useItAt === "string" && vm.data.useItAt.length > 0 ? vm.data.useItAt : null), 
+                horizont:       6,
+                riskTolerance:  50,
+                budget:         10000,
+            }
+
+            if ( vm.data.action && (vm.data.action === "update" || vm.data.action === "clone") ) {
+                vm.managePortfolio.defaultCountry = 'US';
+                vm.managePortfolio.strategy = 'balanced';
+                vm.managePortfolio.useItAt = 'play-portfolio';
             }
         }
 

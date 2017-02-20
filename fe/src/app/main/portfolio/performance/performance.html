@@ -1,0 +1,56 @@
+<div id="portfolio-performance" class="page-layout simple fullwidth doc-page">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <a ng-href="/dashboard" title="Dashboard"><md-icon md-font-icon="icon-home" class="s16"></md-icon></a>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <a ng-href="/portfolios"><span class="parent">PORTFOLIOS</span></a>
+            </div>
+            <div class="title">Portfolio 1</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    
+    <!-- SUBMENU -->
+    <pa-submenu active="performance" items="vm.submenu"></pa-submenu>
+    <!-- /SUBMENU -->
+    
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="md-headline mb-16">Portfolio Performance</div>
+        <md-tabs md-selected="" md-dynamic-height md-border-bottom class="mt-24 md-whiteframe-2dp">
+            <md-tab label="Portfolio level">
+                <md-content layout-padding layout-wrap>
+                    Portfolio 1 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                </md-content>
+            </md-tab>
+            <md-tab label="Positions level">
+                <md-content layout-padding layout-wrap>
+                    <div id="position-1" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-2" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-3" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-4" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-5" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+	</div>
+    <!-- /CONTENT -->
+</div>

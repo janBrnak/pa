@@ -89,7 +89,7 @@
             </md-button>
 
             <md-menu-content width="3" id="language-menu-content">
-                <md-menu-item ng-repeat="lang in vm.languages">
+                <md-menu-item ng-repeat="(iso, lang) in vm.languages">
                     <md-button ng-click="vm.changeLanguage(lang)" aria-label="{{lang.title}}" translate
                                translate-attr-aria-label="{{lang.title}}">
                         <span layout="row" layout-align="start center">

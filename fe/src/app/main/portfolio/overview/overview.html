@@ -1,0 +1,95 @@
+<div id="portfolio-overview" class="page-layout simple fullwidth doc-page">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <a ng-href="/dashboard" title="Dashboard"><md-icon md-font-icon="icon-home" class="s16"></md-icon></a>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <a ng-href="/portfolios"><span class="parent">PORTFOLIOS</span></a>
+            </div>
+            <div class="title">{{vm.portfolioName}}</div>
+        </div>
+
+        <!-- ADD PORTFOLIOS BUTTON -->
+        <md-button class="add-file-button md-fab md-warn" ng-click="vm.managePosition('add')" aria-label="Add Position">
+            <md-icon md-font-icon="icon-plus"></md-icon>
+            <md-tooltip><span>Add Position</span></md-tooltip>
+        </md-button>
+        <!-- / ADD PORTFOLIOS BUTTON -->
+    </div>
+    <!-- / HEADER -->
+    
+    <!-- SUBMENU -->
+    <pa-submenu active="overview" items="vm.submenu"></pa-submenu>
+    <!-- /SUBMENU -->
+
+    <!-- CONTENT -->
+    <div class="content">
+        <!-- SUMMARY -->
+        <div class="md-headline mt-8 mb-8">Summary</div>
+        <div class="portfolio-summary md-whiteframe-2dp white-bg" layout="column" layout-padding>
+            <div class="portfolio-summary-head" layout="row" flex>
+                <div flex="25" flex-sm="33" flex-xs="50"></div>
+                <div flex="25" flex-sm="33" flex-xs="50" layout="row" layout-align="center center">Latest Change</div>
+                <div flex="25" flex-sm="33" layout="row" layout-align="center center" hide-xs>March Gain/Loss</div>
+                <div flex="25" layout="row" layout-align="center center" hide-sm hide-xs>2016 Gain/Loss</div>
+            </div>
+            <div class="portfolio-summary-content" layout="row" flex>
+                <div flex="25" flex-sm="33" flex-xs="50" layout="row" layout-align="center center">90,826</div>
+                <div flex="25" flex-sm="33" flex-xs="50" class="summary-up" layout="row" layout-align="center center">
+                    1,393&nbsp;<i class="icon icon-trending-up s24"></i>&nbsp;1.59%
+                </div>
+                <div flex="25" flex-sm="33" class="summary-up" layout="row" layout-align="center center" hide-xs>
+                    1,092&nbsp;<i class="icon icon-trending-up s24"></i>&nbsp;1.24%
+                </div>
+                <div flex="25" class="summary-down" layout="row" layout-align="center center" hide-sm hide-xs>
+                    3,290&nbsp;<i class="icon icon-trending-down s24"></i>&nbsp;3.57%
+                </div>
+            </div>
+        </div>
+        <!-- /SUMMARY -->
+
+        <!-- POSITIONS -->
+        <md-tabs md-selected="" md-dynamic-height md-border-bottom class="mt-24 md-whiteframe-2dp white-bg">
+            <md-tab label="Positions">
+                <md-content layout-padding layout-wrap>
+                    <pa-positions-table data="vm.positions" order-by="name"></pa-positions-table>
+                </md-content>
+            </md-tab>
+            <md-tab label="Trades">
+                <md-content layout-padding layout-wrap>
+                    <div id="position-1" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-2" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-3" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-4" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                    <div id="position-5" class="postion" layout-gt-sm="row">
+                        <div class="position-name"><a ng-href="/portfolio/1/position/1">Apple Inc.&nbsp;&nbsp;</a></div>
+                        <div class="position-symbol">AAPL</div>
+                    </div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+        <!-- /POSITIONS -->   
+
+        <!-- PERFORMANCE -->
+        <!-- <div class="md-headline mt-24 mb-8">Performance</div>
+        <div class="portfolio-trending md-whiteframe-2dp white-bg" layout="column" layout-padding>
+            <nvd3 options="vm.lineChartPortfolio" data="vm.lineChartPortfolioData"></nvd3>
+        </div> -->
+        <!-- /PERFORMANCE -->
+	</div>
+    <!-- /CONTENT -->
+</div>
