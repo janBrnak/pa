@@ -6,7 +6,7 @@
         .controller('OverviewController', OverviewController);
 
     /** @ngInject */
-    function OverviewController($stateParams, $mdDialog, $mdMedia, $document, paSettingsOfCharts, PortfolioData, paApiPrtfolios) {
+    function OverviewController($stateParams, $mdDialog, $mdMedia, $document, paSettingsOfCharts, PortfolioData, paApiPositions, paApiPrtfolios) {
         var vm = this;
         
         // Data
@@ -54,8 +54,8 @@
                     return_qtd: parseInt(position.quantity), 
                     return_ytd: 44.44, 
                     return_oney: 43.44, 
-                    transactions: null}
-                );
+                    transactions: null
+                });
             })
         }
 
@@ -97,9 +97,29 @@
 
             },  function(data) { // save
                 if (data) {
-                    // paApiPrtfolios.manage(data.action, data.form).then(function(data) {
-                    //     vm.portfolios = data.portfolios;
-                    // });
+                    paApiPositions.manage(data.action, data.form).then(function(positions) {
+                        var positionsId = [];
+
+                        if (positions.length) {
+                            vm.positions.body = [];
+                        }
+
+                        positions.forEach(function(position) {
+                            positionsId.push('DbPos~' + position.id);
+                            vm.positions.body.push({
+                                id: position.id, 
+                                symbol: position.symbol, 
+                                name: position.name, 
+                                shares: parseInt(position.shares),
+                                return_qtd: parseInt(position.shares), 
+                                return_ytd: 44.44, 
+                                return_oney: 43.44, 
+                                transactions: null
+                            });
+                        });
+
+                        paApiPrtfolios.manage('update', {id: $stateParams.id, name: vm.portfolioName, positions: positionsId.toString()});
+                    });
                 }
             });
         }

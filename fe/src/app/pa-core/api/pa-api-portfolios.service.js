@@ -43,7 +43,7 @@
             var data = {
                 name: portfolio.name,
                 rootName: '',
-                positions: ''
+                positions: portfolio.positions || ''
             };
 
             if (action === 'update' && portfolio.id) { // update

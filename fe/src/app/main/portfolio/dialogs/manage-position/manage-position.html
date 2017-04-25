@@ -19,7 +19,16 @@
                 <div id="manage-position-item-{{$index}}" class="manage-position-item" ng-repeat="position in vm.managePosition" layout>
                     <div layout="row" flex>
                         <!-- Symbol -->
-                        <md-autocomplete flex
+                        <md-input-container class="mb-0" flex>
+                            <input type="text" name="symbol" ng-model="position.symbol" ng-pattern="/^[a-zA-Z]+$/" placeholder="Symbol" required />
+                            <div ng-messages="managePosition[$index].symbol.$error" ng-show="managePosition[$index].symbol.$touched" multiple role="alert">
+                                <div ng-message="required"><span>ERROR: required</span></div>
+                                <div ng-message="min"><span>ERROR: min</span></div>
+                                <div ng-message="max"><span>ERROR: max</span></div>
+                                <div ng-message="pattern"><span>ERROR: pattern</span></div>
+                            </div>
+                        </md-input-container>
+                        <!-- <md-autocomplete flex
                             ng-disabled="false"
                             ng-model="position.symbol"
                             ng-pattern="/^[a-zA-Z]+$/"
@@ -43,7 +52,7 @@
                                 <div ng-message="min"><span>ERROR: min</span></div>
                                 <div ng-message="max"><span>ERROR: max</span></div>
                             </div>
-                        </md-autocomplete>
+                        </md-autocomplete> -->
                         <!-- / Symbol -->
                         <!-- Shares -->
                         <md-input-container class="mb-0" flex>
@@ -74,7 +83,7 @@
                 </div>
             </div>
             <div class="add-position-empty" layout>
-                <md-button aria-label="+ Add Another Position" flex ng-click="vm.clonePositionEmpty()"> + Add Another Position</md-button>
+                <md-button aria-label="+ Add Another Position" flex ng-click="vm.clonePositionEmpty(vm.managePosition)"> + Add Another Position</md-button>
             </div>
         </md-dialog-content>
         <!-- / DIALOG CONTENT -->

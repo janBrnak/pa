@@ -16,6 +16,9 @@
             positions: {
                 list: '/positions',
                 search: '',
+                create: '/positions',
+                update: '/positions/:id',
+                remove: '/positions/:id'
             },
             timeseries: {
                 list: '/timeseries',

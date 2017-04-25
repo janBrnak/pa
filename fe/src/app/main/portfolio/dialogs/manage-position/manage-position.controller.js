@@ -50,38 +50,25 @@
          * @param data object
          * @return null
          */
-        function managePositionAction( data ) {
-            var action = vm.data.action;
-
-            if ( action ) {
-                switch (action) {
-                    case 'add':
-                        console.log('add position');
-                        break;
-                    case 'edit':
-                        console.log('edit position');
-                        break;
-                }
-            }
-
-            console.log(data);
-            $mdDialog.cancel();
+        function managePositionAction(form) {
+            $mdDialog.cancel({action: vm.data.action, form: form});
         }
 
-        function clonePositionEmpty () {
-            var items = angular.element('.manage-position-item:hidden');
+        function clonePositionEmpty (positions) {
             var button = angular.element('.add-position-empty');
 
             // add into object
-            vm.managePosition[10 - items.length] = { symbol: '', shares: null, price: null, date: new Date() };
+            vm.managePosition[positions.length] = { symbol: '', shares: null, price: null, date: new Date() };
 
             // hide button for add position empty
-            if ( items.length - 1 === 0 )
+            if ( positions.length === 10 ) {
                 button.css({display: 'none'});
+            }
 
             // show empty position
-            if ( items.length )
-                items.first().css({display: 'block'});
+            // if ( positions.length ) {
+            //     positions.first().css({display: 'block'});
+            // }
         }
 
         /**
