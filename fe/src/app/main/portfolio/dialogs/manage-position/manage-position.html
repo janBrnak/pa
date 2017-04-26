@@ -56,7 +56,7 @@
                         <!-- / Symbol -->
                         <!-- Shares -->
                         <md-input-container class="mb-0" flex>
-                            <input type="number" step="any" name="shares" ng-model="position.shares" min="1" max="999" ng-pattern="/^[0-9]+$/" placeholder="Shares" required />
+                            <input type="number" step="any" name="shares" ng-model="position.shares" min="1" max="100" ng-pattern="/^[0-9]+$/" placeholder="Shares" required />
                             <div ng-messages="managePosition[$index].shares.$error" ng-show="managePosition[$index].shares.$touched" multiple role="alert">
                                 <div ng-message="required"><span>ERROR: required</span></div>
                                 <div ng-message="min"><span>ERROR: min</span></div>

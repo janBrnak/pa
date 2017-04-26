@@ -6,14 +6,14 @@
         .controller('RiskController', RiskController);
 
     /** @ngInject */
-    function RiskController() {
+    function RiskController($stateParams) {
         var vm = this;
         
         // Data
         vm.submenu = [
-            {'key': 'overview', 'title': 'Overview', 'href': '/portfolio/1/overview'},
-            {'key': 'performance', 'title': 'Performance', 'href': '/portfolio/1/performance'},
-            {'key': 'risk', 'title': 'Risk', 'href': '/portfolio/1/risk'},
+            {'key': 'overview', 'title': 'Overview', 'href': '/portfolio/' + $stateParams.id + '/overview'},
+            {'key': 'performance', 'title': 'Performance', 'href': '/portfolio/' + $stateParams.id + '/performance'},
+            {'key': 'risk', 'title': 'Risk', 'href': '/portfolio/' + $stateParams.id + '/risk'},
         ];
 
         // Methods

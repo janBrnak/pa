@@ -17,9 +17,9 @@
         vm.lineChartPortfolioData = [];
 
         vm.submenu = [
-            {'key': 'overview', 'title': 'Overview', 'href': '/portfolio/1/overview'},
-            {'key': 'performance', 'title': 'Performance', 'href': '/portfolio/1/performance'},
-            {'key': 'risk', 'title': 'Risk', 'href': '/portfolio/1/risk'},
+            {'key': 'overview', 'title': 'Overview', 'href': '/portfolio/' + $stateParams.id + '/overview'},
+            {'key': 'performance', 'title': 'Performance', 'href': '/portfolio/' + $stateParams.id + '/performance'},
+            {'key': 'risk', 'title': 'Risk', 'href': '/portfolio/' + $stateParams.id + '/risk'},
         ];
 
         vm.positions = {
@@ -106,16 +106,19 @@
 
                         positions.forEach(function(position) {
                             positionsId.push('DbPos~' + position.id);
-                            vm.positions.body.push({
-                                id: position.id, 
-                                symbol: position.symbol, 
-                                name: position.name, 
-                                shares: parseInt(position.shares),
-                                return_qtd: parseInt(position.shares), 
-                                return_ytd: 44.44, 
-                                return_oney: 43.44, 
-                                transactions: null
-                            });
+
+                            if (position.symbol && position.name && position.shares) {
+                                vm.positions.body.push({
+                                    id: position.id, 
+                                    symbol: position.symbol, 
+                                    name: position.name, 
+                                    shares: parseInt(position.shares),
+                                    return_qtd: parseInt(position.shares), 
+                                    return_ytd: 44.44, 
+                                    return_oney: 43.44, 
+                                    transactions: null
+                                });
+                            }
                         });
 
                         paApiPrtfolios.manage('update', {id: $stateParams.id, name: vm.portfolioName, positions: positionsId.toString()});
